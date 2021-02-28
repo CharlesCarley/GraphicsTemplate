@@ -42,7 +42,8 @@ set(Graphics_NO_PALETTE           ${GraphicsTemplate_NO_PALETTE}          CACHE 
 set(Graphics_OP_CHECKS            ${GraphicsTemplate_OP_CHECKS}           CACHE BOOL "" FORCE)
 set(Graphics_EXTRA_BUILTIN_FONTS  ${GraphicsTemplate_EXTRA_BUILTIN_FONTS} CACHE BOOL "" FORCE)
 
-
+set(FreeImage_SILENT TRUE)
+set(GraphicsTemplate_SILENT TRUE)
 
 
 # Define the extern path relative to 

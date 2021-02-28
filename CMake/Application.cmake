@@ -21,10 +21,13 @@
 include (CopyTarget)
 
 macro(add_application TARGETNAME)
-    message(STATUS "Configuring: ${TARGETNAME}")
-    message(STATUS "${TARGETNAME}_SRC ==> ${${TARGETNAME}_SRC}")
-    message(STATUS "${TARGETNAME}_INC ==> ${${TARGETNAME}_INC}")
-    message(STATUS "${TARGETNAME}_LIB ==> ${${TARGETNAME}_LIB}")
+
+    if(NOT GraphicsTemplate_SILENT)
+        message(STATUS "Configuring: ${TARGETNAME}")
+        message(STATUS "${TARGETNAME}_SRC ==> ${${TARGETNAME}_SRC}")
+        message(STATUS "${TARGETNAME}_INC ==> ${${TARGETNAME}_INC}")
+        message(STATUS "${TARGETNAME}_LIB ==> ${${TARGETNAME}_LIB}")
+    endif()
 
     include_directories(. ${Graphics_INCLUDE} ${${TARGETNAME}_INC})
     if (GraphicsTemplate_WIN_MAIN)
