@@ -41,6 +41,10 @@ set(Graphics_USE_SDL              ${GraphicsTemplate_USE_SDL}             CACHE 
 set(Graphics_NO_PALETTE           ${GraphicsTemplate_NO_PALETTE}          CACHE BOOL "" FORCE)
 set(Graphics_OP_CHECKS            ${GraphicsTemplate_OP_CHECKS}           CACHE BOOL "" FORCE)
 set(Graphics_EXTRA_BUILTIN_FONTS  ${GraphicsTemplate_EXTRA_BUILTIN_FONTS} CACHE BOOL "" FORCE)
+set(Graphics_BACKEND_OPENGL       ${GraphicsTemplate_BACKEND_OPENGL}      CACHE BOOL "" FORCE)
+
+
+
 
 set(FreeImage_SILENT TRUE)
 set(GraphicsTemplate_SILENT TRUE)
