@@ -24,7 +24,7 @@
 #include "Math/skColor.h"
 #include "Utils/skLogger.h"
 
-int main(int, char**)
+int main(int argc, char** argv)
 {
     try
     {
@@ -33,8 +33,9 @@ int main(int, char**)
         log.open("GraphicsTemplate.log");
 
         Application app;
-        app.run();
-        return 0;
+        if (app.parseCommandLine(argc, argv) != 0)
+            return 1;
+        return app.run();
     }
     catch (...)
     {
