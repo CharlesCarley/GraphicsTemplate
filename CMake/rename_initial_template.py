@@ -9,8 +9,6 @@ def genTemplates():
 
     files = [
         "CMakeLists.txt",
-        "Jenkinsfile",
-        ".github/workflows/autobuild.yml",
         "CMake/CMakeLists.txt",
         "CMake/Configure.cmake",
         "Source/CMakeLists.txt",
