@@ -8,9 +8,12 @@ def genTemplates():
     global templatename
 
     files = [
+        "README.md",
         "CMakeLists.txt",
         "CMake/CMakeLists.txt",
         "CMake/Configure.cmake",
+        "Bin/Readme.md",
+        "Extern/CMakeLists.txt",
         "Source/CMakeLists.txt",
         "Source/Main.cpp",
         "Source/Application.cpp",
