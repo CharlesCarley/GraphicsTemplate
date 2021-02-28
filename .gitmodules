@@ -19,9 +19,12 @@
 [submodule "Extern/FreeImage"]
 	path = Extern/FreeImage
 	url = https://github.com/CharlesCarley/FreeImage.git
-[submodule "Dependencies/FreeType"]
-	path = Dependencies/FreeType
-	url = https://github.com/CharlesCarley/FreeType.git
 [submodule "Extern/SDL"]
 	path = Extern/SDL
 	url = https://github.com/CharlesCarley/SDL.git
+[submodule "Extern/Data2Array"]
+	path = Extern/Data2Array
+	url = https://github.com/CharlesCarley/Data2Array.git
+[submodule "Extern/FreeType"]
+	path = Extern/FreeType
+	url = https://github.com/CharlesCarley/FreeType.git

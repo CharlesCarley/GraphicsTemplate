@@ -19,8 +19,23 @@
 # 3. This notice may not be removed or altered from any source distribution.
 # ------------------------------------------------------------------------------
 include(StaticRuntime)
+include(ExternalTarget)
+
 set_static_runtime()
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 option(GraphicsTemplate_BUILD_TEST     "Build the unit test program." ON)
 option(GraphicsTemplate_AUTO_RUN_TEST  "Automatically run the test program." OFF)
+
+# Define the extern path relative to 
+# the GraphicsTemplate source directory
+set(Extern ${GraphicsTemplate_SOURCE_DIR}/Extern)
+
+DefineExternalTarget(Utils         Extern "${Extern}")
+DefineExternalTarget(Math          Extern "${Extern}")
+DefineExternalTarget(FreeType      Extern "${Extern}/FreeType/Source/2.10.4/include")
+DefineExternalTarget(FreeImage     Extern "${Extern}/FreeImage/Source")
+DefineExternalTarget(Image         Extern "${Extern}/Image")
+DefineExternalTarget(Graphics      Extern "${Extern}/Graphics")
+DefineExternalTarget(Window        Extern "${Extern}/Graphics")
+

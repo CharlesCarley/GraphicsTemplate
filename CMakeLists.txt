@@ -3,24 +3,15 @@ project(GraphicsTemplate)
 
 # Set the module path to include scripts
 list(APPEND CMAKE_MODULE_PATH  ${GraphicsTemplate_SOURCE_DIR}/CMake)
+list(APPEND CMAKE_MODULE_PATH  ${GraphicsTemplate_SOURCE_DIR}/Extern/Data2Array/CMake)
 include(Configure)
+subdirs(CMake)
+subdirs(Extern)
 
-if (GraphicsTemplate_ExternalTarget)
+set(TargetName GraphicsTemplate)
 
-    set(TargetFolders ${GraphicsTemplate_TargetFolders})
-    set(TargetName    ${GraphicsTemplate_TargetName})
-    set(TargetGroup   ${GraphicsTemplate_TargetGroup})
-else()
-    subdirs(CMake)
-
-    set(TargetFolders FALSE)
-    set(TargetName GraphicsTemplate)
-
-    set(GraphicsTemplate_INCLUDE  ${GraphicsTemplate_SOURCE_DIR}/Source)
-    set(GraphicsTemplate_LIBRARY  ${TargetName})
-
-endif()
-
+set(GraphicsTemplate_INCLUDE  ${GraphicsTemplate_SOURCE_DIR}/Source)
+set(GraphicsTemplate_LIBRARY  ${TargetName})
 subdirs(Source)
 
 if (GraphicsTemplate_BUILD_TEST)
