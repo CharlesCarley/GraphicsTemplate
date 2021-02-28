@@ -24,18 +24,49 @@ include(ExternalTarget)
 set_static_runtime()
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-option(GraphicsTemplate_BUILD_TEST     "Build the unit test program." ON)
-option(GraphicsTemplate_AUTO_RUN_TEST  "Automatically run the test program." OFF)
+option(GraphicsTemplate_COPY_BIN       "Copy binary to the bin directory." ON)
+option(GraphicsTemplate_BACKEND_OPENGL "Build the OpenGL backend." ON)
 
 # Define the extern path relative to 
 # the GraphicsTemplate source directory
 set(Extern ${GraphicsTemplate_SOURCE_DIR}/Extern)
 
+DefineExternalTarget(Data2Array    Extern "${Extern}/Data2Array")
 DefineExternalTarget(Utils         Extern "${Extern}")
 DefineExternalTarget(Math          Extern "${Extern}")
 DefineExternalTarget(FreeType      Extern "${Extern}/FreeType/Source/2.10.4/include")
 DefineExternalTarget(FreeImage     Extern "${Extern}/FreeImage/Source")
 DefineExternalTarget(Image         Extern "${Extern}/Image")
 DefineExternalTarget(Graphics      Extern "${Extern}/Graphics")
-DefineExternalTarget(Window        Extern "${Extern}/Graphics")
+
+if (GraphicsTemplate_BACKEND_OPENGL)
+    DefineExternalTarget(Window        Extern "${Extern}/Window")
+
+    set(OpenGL_GL_PREFERENCE GLVND)
+
+    find_package(OpenGL REQUIRED)
+    set(OpenGL_LIB ${OPENGL_LIBRARIES})
+endif()
+
+
+set(Graphics_INCLUDE
+    ${Extern}/Graphics/
+    ${GraphicsTemplate_BINARY_DIR}
+    ${Utils_INCLUDE} 
+    ${Math_INCLUDE} 
+    ${Window_INCLUDE} 
+    ${Image_INCLUDE} 
+    ${FreeType_INCLUDE} 
+    ${FreeImage_INCLUDE} 
+)
+
+set(Graphics_LIBRARY
+    Graphics
+    ${Utils_LIBRARY} 
+    ${Math_LIBRARY} 
+    ${Window_LIBRARY} 
+    ${Image_LIBRARY} 
+    ${FreeType_LIBRARY} 
+    ${FreeImage_LIBRARY} 
+)
 

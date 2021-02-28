@@ -1,4 +1,5 @@
 # -----------------------------------------------------------------------------
+#
 #   Copyright (c) Charles Carley.
 #
 #   This software is provided 'as-is', without any express or implied
@@ -17,18 +18,30 @@
 #    misrepresented as being the original software.
 # 3. This notice may not be removed or altered from any source distribution.
 # ------------------------------------------------------------------------------
-include(Application)
-set(TargetName_RES Resource/AppIcon.rc)
+include (CopyTarget)
 
-set(GraphicsTemplate_SRC 
-    Application.h
-    Application.cpp
-    Main.cpp
-    ${TargetName_RES}
-)
+macro(add_application TARGETNAME)
+    message(STATUS "Configuring: ${TARGETNAME}")
+    message(STATUS "${TARGETNAME}_SRC ==> ${${TARGETNAME}_SRC}")
+    message(STATUS "${TARGETNAME}_INC ==> ${${TARGETNAME}_INC}")
+    message(STATUS "${TARGETNAME}_LIB ==> ${${TARGETNAME}_LIB}")
 
-#set(GraphicsTemplate_INC .)
-#set(GraphicsTemplate_LIB ws2_32)
+    include_directories(. ${Graphics_INCLUDE} ${${TARGETNAME}_INC})
+    if (Window_DEFINE_WINMAIN)
+        add_executable(${TARGETNAME}  WIN32 ${${TARGETNAME}_SRC})
+    else()
+        add_executable(${TARGETNAME} ${${TARGETNAME}_SRC})
+    endif()
 
+    target_link_libraries(
+        ${TARGETNAME}
+        ${Graphics_LIBRARY}
+        ${${TARGETNAME}_LIB}
+       )
 
-add_application(GraphicsTemplate)
+    if (${TARGETNAME}_COPY_BIN) 
+    
+        copy_target(${TARGETNAME} ${CMAKE_SOURCE_DIR}/Bin) 
+
+    endif()
+endmacro()

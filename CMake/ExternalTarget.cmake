@@ -1,4 +1,5 @@
 # -----------------------------------------------------------------------------
+#
 #   Copyright (c) Charles Carley.
 #
 #   This software is provided 'as-is', without any express or implied
@@ -17,18 +18,15 @@
 #    misrepresented as being the original software.
 # 3. This notice may not be removed or altered from any source distribution.
 # ------------------------------------------------------------------------------
-include(Application)
-set(TargetName_RES Resource/AppIcon.rc)
-
-set(GraphicsTemplate_SRC 
-    Application.h
-    Application.cpp
-    Main.cpp
-    ${TargetName_RES}
-)
-
-#set(GraphicsTemplate_INC .)
-#set(GraphicsTemplate_LIB ws2_32)
 
 
-add_application(GraphicsTemplate)
+macro(DefineExternalTarget NAME GROUP INCLUDE )
+    set(${NAME}_ExternalTarget      TRUE)
+    set(${NAME}_TargetFolders       TRUE)
+    set(${NAME}_TargetName          ${NAME})
+    set(${NAME}_TargetGroup         ${GROUP})
+    set(${NAME}_FOLDER              ${GROUP})
+    set(${NAME}_INCLUDE             ${INCLUDE})
+    set(${NAME}_LIBRARY             ${${NAME}_TargetName})
+endmacro()
+

@@ -19,26 +19,37 @@
   3. This notice may not be removed or altered from any source distribution.
 -------------------------------------------------------------------------------
 */
-#include "Application.h"
-#include "Graphics/skGraphics.h"
-#include "Math/skColor.h"
-#include "Utils/skLogger.h"
+#ifndef _Application_h_
+#define _Application_h_
 
-int main(int, char**)
+
+#include "Window/skWindow.h"
+#include "Window/skWindowHandler.h"
+
+
+class Application : public skWindowHandler
 {
-    try
-    {
-        skLogger log;
-        log.setFlags(LF_STDOUT | LF_FILE);
-        log.open("Application.log");
+private:
+    skKeyboard*      m_key;
+    skMouse*         m_mouse;
+    skWindow*        m_window;
 
-        Application app;
-        app.run();
-        return 0;
-    }
-    catch (...)
-    {
-    }
+    void handleKey(skWindow* window) const;
 
-    return 1;
-}
+    void initialize(skWindow* win);
+
+    void handle(const skEventType& evt, skWindow* caller) override;
+
+    void redraw();
+
+public:
+    Application();
+
+    ~Application() override;
+
+    int parseCommandLine(int argc, char** argv);
+
+    int run();
+};
+
+#endif  //_Application_h_

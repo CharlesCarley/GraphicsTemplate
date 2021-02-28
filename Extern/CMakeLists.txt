@@ -18,31 +18,19 @@
 #    misrepresented as being the original software.
 # 3. This notice may not be removed or altered from any source distribution.
 # ------------------------------------------------------------------------------
-set(TestTargetName ${TargetName}Test)
+subdirs(FreeType)
+subdirs(FreeImage)
+subdirs(Utils)
+subdirs(Math)
+subdirs(Image)
 
-set(TestTarget_SOURCE
-    Test1.cpp
-)
 
-include_directories(. googletest)
-
-add_executable(
-    ${TestTargetName}
-    ${TestTarget_SOURCE}
-)
-target_link_libraries(${TestTargetName} gtest_main)
-
-if (TargetFolders)
-    set_target_properties(${TargetName} PROPERTIES FOLDER "${TargetGroup}")
+if(GraphicsTemplate_BACKEND_OPENGL)
+    if (Graphics_USE_SDL)
+        subdirs(SDL)
+    endif()
+    subdirs(Window/Window)
 endif()
 
-
-if (GraphicsTemplate_AUTO_RUN_TEST)
-
-   add_custom_command(TARGET 
-        ${TestTargetName} POST_BUILD
-        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-        COMMAND  $<TARGET_FILE:${TestTargetName}>
-    )
-        
-endif()
+subdirs(Data2Array)
+subdirs(Graphics/Graphics)

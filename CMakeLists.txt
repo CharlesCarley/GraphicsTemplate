@@ -13,11 +13,3 @@ set(TargetName GraphicsTemplate)
 set(GraphicsTemplate_INCLUDE  ${GraphicsTemplate_SOURCE_DIR}/Source)
 set(GraphicsTemplate_LIBRARY  ${TargetName})
 subdirs(Source)
-
-if (GraphicsTemplate_BUILD_TEST)
-    set(BUILD_GMOCK   OFF CACHE BOOL "" FORCE)
-    set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
-
-    subdirs(Test/googletest)
-    subdirs(Test)
-endif()
