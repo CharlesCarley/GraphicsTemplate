@@ -95,7 +95,7 @@ int Application::parseCommandLine(int argc, char** argv)
 
 int Application::run()
 {
-    skWindowManager mgr(WM_CTX_PLATFORM);
+    skWindowManager mgr(WM_CTX_SDL);
     mgr.addHandler(this);
 
     skWindow* win = mgr.create("Graphics Template", 800, 600, WM_WF_SHOW_CENT_DIA);

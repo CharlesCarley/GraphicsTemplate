@@ -27,7 +27,7 @@ macro(add_application TARGETNAME)
     message(STATUS "${TARGETNAME}_LIB ==> ${${TARGETNAME}_LIB}")
 
     include_directories(. ${Graphics_INCLUDE} ${${TARGETNAME}_INC})
-    if (Window_DEFINE_WINMAIN)
+    if (GraphicsTemplate_WIN_MAIN)
         add_executable(${TARGETNAME}  WIN32 ${${TARGETNAME}_SRC})
     else()
         add_executable(${TARGETNAME} ${${TARGETNAME}_SRC})

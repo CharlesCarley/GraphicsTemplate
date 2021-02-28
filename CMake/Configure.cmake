@@ -24,8 +24,26 @@ include(ExternalTarget)
 set_static_runtime()
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-option(GraphicsTemplate_COPY_BIN       "Copy binary to the bin directory." ON)
-option(GraphicsTemplate_BACKEND_OPENGL "Build the OpenGL backend." ON)
+option(GraphicsTemplate_COPY_BIN            "Copy binary to the bin directory." ON)
+option(GraphicsTemplate_BACKEND_OPENGL      "Build the OpenGL backend." ON)
+option(GraphicsTemplate_USE_SDL             "Build with SDL" OFF)
+option(GraphicsTemplate_NO_PALETTE          "Disable builtin palette" OFF)
+option(GraphicsTemplate_OP_CHECKS           "Check function parameters" ON)
+option(GraphicsTemplate_EXTRA_BUILTIN_FONTS "Include extra fonts in the build. https://fonts.google.com/" OFF)
+
+if (WIN32)
+    option(GraphicsTemplate_WIN_MAIN "Wrap main function for WinMain." ON)
+    set(Window_DEFINE_WINMAIN ${GraphicsTemplate_WIN_MAIN} CACHE BOOL "" FORCE)
+endif()
+  
+set(Window_WITH_SDL               ${GraphicsTemplate_USE_SDL}             CACHE BOOL "" FORCE)
+set(Graphics_USE_SDL              ${GraphicsTemplate_USE_SDL}             CACHE BOOL "" FORCE)
+set(Graphics_NO_PALETTE           ${GraphicsTemplate_NO_PALETTE}          CACHE BOOL "" FORCE)
+set(Graphics_OP_CHECKS            ${GraphicsTemplate_OP_CHECKS}           CACHE BOOL "" FORCE)
+set(Graphics_EXTRA_BUILTIN_FONTS  ${GraphicsTemplate_EXTRA_BUILTIN_FONTS} CACHE BOOL "" FORCE)
+
+
+
 
 # Define the extern path relative to 
 # the GraphicsTemplate source directory
@@ -38,6 +56,12 @@ DefineExternalTarget(FreeType      Extern "${Extern}/FreeType/Source/2.10.4/incl
 DefineExternalTarget(FreeImage     Extern "${Extern}/FreeImage/Source")
 DefineExternalTarget(Image         Extern "${Extern}/Image")
 DefineExternalTarget(Graphics      Extern "${Extern}/Graphics")
+
+if (GraphicsTemplate_USE_SDL AND GraphicsTemplate_BACKEND_OPENGL)
+    set(SDL_FOLDER Extern)
+    set(SDL_LIBRARY SDL2main SDL2-static)
+    set(SDL_INCLUDE ${Extern}/SDL/SDL)
+endif()
 
 if (GraphicsTemplate_BACKEND_OPENGL)
     DefineExternalTarget(Window        Extern "${Extern}/Window")
@@ -58,6 +82,7 @@ set(Graphics_INCLUDE
     ${Image_INCLUDE} 
     ${FreeType_INCLUDE} 
     ${FreeImage_INCLUDE} 
+    ${SDL_INCLUDE}
 )
 
 set(Graphics_LIBRARY
@@ -67,6 +92,7 @@ set(Graphics_LIBRARY
     ${Window_LIBRARY} 
     ${Image_LIBRARY} 
     ${FreeType_LIBRARY} 
-    ${FreeImage_LIBRARY} 
+    ${FreeImage_LIBRARY}
+    ${SDL_LIBRARY}
 )
 
