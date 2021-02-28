@@ -1,4 +1,4 @@
-# Template
+# GraphicsTemplate
 
 A sub-module template repository.
 
@@ -68,7 +68,7 @@ target_link_libraries(HelloWorld  ${Utils_LIBRARY})
 
 The files [gitupdate.py](gitupdate.py) or [gitupdate.bat](gitupdate.bat) help automate initial cloning and with keeping the modules up to date.
 
-Once this project has been cloned. The following command will initialize any external modules.
+Once this project has been cloned. The following command will initialize external modules.
 
 ```txt
 python gitupdate.py 
@@ -76,9 +76,19 @@ python gitupdate.py
 gitupdate.bat 
 ```
 
-## Testing
+**Sub-modules in this template**
 
-The testing directory is setup to work with [googletest](https://github.com/google/googletest). As well as the initial setup for testing the standalone module either using GitHub actions or with Jenkins.
+| Name       | Description                                              |
+|------------|----------------------------------------------------------|
+| Utils      | Provides common all around functionality.                |
+| Math       | Math support.                                            |
+| Window     | Window support.                                          |
+| Image      | Image I/O.                                               |
+| Graphics   | 2D Rendering context.                                    |
+| FreeImage  | Support library for Image.                               |
+| FreeType   | Support library for font I/O.                            |
+| SDL        | Optional Backend for the window library.                 |
+| Data2Array | Compile time tool to pack resources into the executable. |
 
 ## Building
 
@@ -94,7 +104,11 @@ make
 
 Optional defines.
 
-| Option                 | Description                         | Default |
-|:-----------------------|:------------------------------------|:-------:|
-| Template_BUILD_TEST    | Build the unit test program.        |   OFF   |
-| Template_AUTO_RUN_TEST | Automatically run the test program. |   OFF   |
+| Option                               | Description                                                    | Default |
+|:-------------------------------------|:---------------------------------------------------------------|:-------:|
+| GraphicsTemplate_COPY_BIN            | Copy binary to the bin directory.                              |   ON    |
+| GraphicsTemplate_BACKEND_OPENGL      | Build the OpenGL backend.                                      |   ON    |
+| GraphicsTemplate_USE_SDL             | Build with SDL.                                                |   OFF   |
+| GraphicsTemplate_NO_PALETTE          | Disable builtin palette.                                       |   OFF   |
+| GraphicsTemplate_OP_CHECKS           | Extra checks on function parameters                            |   ON    |
+| GraphicsTemplate_EXTRA_BUILTIN_FONTS | Include extra [fonts](https://fonts.google.com/) in the build. |   OFF   |
