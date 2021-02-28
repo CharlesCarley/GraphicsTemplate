@@ -11,6 +11,7 @@ def genTemplates():
         "README.md",
         "CMakeLists.txt",
         "CMake/CMakeLists.txt",
+        "CMake/Application.cmake",
         "CMake/Configure.cmake",
         "Bin/Readme.md",
         "Extern/CMakeLists.txt",
