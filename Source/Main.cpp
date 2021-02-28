@@ -30,7 +30,7 @@ int main(int, char**)
     {
         skLogger log;
         log.setFlags(LF_STDOUT | LF_FILE);
-        log.open("Application.log");
+        log.open("GraphicsTemplate.log");
 
         Application app;
         app.run();
