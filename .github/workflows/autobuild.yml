@@ -16,11 +16,11 @@ jobs:
        run: git submodule update --init --merge
 
      - name: Configure
-       run: cmake -DTemplate_BUILD_TEST=ON -DTemplate_AUTO_RUN_TEST=ON .
+       run: cmake -DGraphicsTemplate_BUILD_TEST=ON -DGraphicsTemplate_AUTO_RUN_TEST=ON .
 
      - name: Build
        run: make
 
      - name: Test Output
-       run: ./Source/Template > out.ans && diff out.ans Test/inp.ans
+       run: ./Source/GraphicsTemplate > out.ans && diff out.ans Test/inp.ans
        

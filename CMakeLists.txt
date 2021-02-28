@@ -1,29 +1,29 @@
 cmake_minimum_required(VERSION 3.0)
-project(Template)
+project(GraphicsTemplate)
 
 # Set the module path to include scripts
-list(APPEND CMAKE_MODULE_PATH  ${Template_SOURCE_DIR}/CMake)
+list(APPEND CMAKE_MODULE_PATH  ${GraphicsTemplate_SOURCE_DIR}/CMake)
 include(Configure)
 
-if (Template_ExternalTarget)
+if (GraphicsTemplate_ExternalTarget)
 
-    set(TargetFolders ${Template_TargetFolders})
-    set(TargetName    ${Template_TargetName})
-    set(TargetGroup   ${Template_TargetGroup})
+    set(TargetFolders ${GraphicsTemplate_TargetFolders})
+    set(TargetName    ${GraphicsTemplate_TargetName})
+    set(TargetGroup   ${GraphicsTemplate_TargetGroup})
 else()
     subdirs(CMake)
 
     set(TargetFolders FALSE)
-    set(TargetName Template)
+    set(TargetName GraphicsTemplate)
 
-    set(Template_INCLUDE  ${Template_SOURCE_DIR}/Source)
-    set(Template_LIBRARY  ${TargetName})
+    set(GraphicsTemplate_INCLUDE  ${GraphicsTemplate_SOURCE_DIR}/Source)
+    set(GraphicsTemplate_LIBRARY  ${TargetName})
 
 endif()
 
 subdirs(Source)
 
-if (Template_BUILD_TEST)
+if (GraphicsTemplate_BUILD_TEST)
     set(BUILD_GMOCK   OFF CACHE BOOL "" FORCE)
     set(INSTALL_GTEST OFF CACHE BOOL "" FORCE)
 
