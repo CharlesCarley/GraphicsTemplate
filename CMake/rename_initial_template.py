@@ -1,4 +1,6 @@
-import sys, os, datetime
+import sys
+import os
+import datetime
 
 templatename = input("Template name:")
 templatename = templatename.replace(" ", "")
@@ -44,6 +46,8 @@ def genTemplates():
                 fp = open(full_path, "w")
                 fp.write(buf)
                 fp.close()
+
+    os.rename("Bin/GraphicsTemplate.html", "Bin/%s.html" % templatename)
 
 
 genTemplates()
