@@ -20,6 +20,8 @@
 # ------------------------------------------------------------------------------
 include(StaticRuntime)
 include(ExternalTarget)
+include(FindVSEmscripten)
+
 
 set_static_runtime()
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)

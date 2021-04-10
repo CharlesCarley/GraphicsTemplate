@@ -19,6 +19,7 @@
 # 3. This notice may not be removed or altered from any source distribution.
 # ------------------------------------------------------------------------------
 include (CopyTarget)
+include (FindVSEmscripten)
 
 macro(add_application TARGETNAME)
 
@@ -30,10 +31,28 @@ macro(add_application TARGETNAME)
     endif()
 
     include_directories(. ${Graphics_INCLUDE} ${${TARGETNAME}_INC})
-    if (GraphicsTemplate_WIN_MAIN)
+    if (USING_EMSCRIPTEN)
+        set(BIN_DIR ${CMAKE_SOURCE_DIR}/Bin)
+        add_executable(${TargetName}   ${BIN_DIR}/${TargetName}.html ${${TARGETNAME}_SRC})
+        
+        enable_emscripten_html_executable(${TargetName})
+
+        set_target_properties(${TargetName} PROPERTIES VS_GLOBAL_EmSdlVersion        2)
+        set_target_properties(${TargetName} PROPERTIES VS_GLOBAL_EmUseFullOpenGles2  true)
+
+        emscripten_copy_wasm_target_wasm_js(${TargetName} ${CMAKE_SOURCE_DIR}/Bin) 
+
+
+    elseif (GraphicsTemplate_WIN_MAIN)
         add_executable(${TARGETNAME}  WIN32 ${${TARGETNAME}_SRC})
+        if (${TARGETNAME}_COPY_BIN) 
+            copy_target(${TARGETNAME} ${CMAKE_SOURCE_DIR}/Bin) 
+        endif()
     else()
         add_executable(${TARGETNAME} ${${TARGETNAME}_SRC})
+        if (${TARGETNAME}_COPY_BIN) 
+            copy_target(${TARGETNAME} ${CMAKE_SOURCE_DIR}/Bin) 
+        endif()
     endif()
 
     target_link_libraries(
@@ -42,9 +61,4 @@ macro(add_application TARGETNAME)
         ${${TARGETNAME}_LIB}
        )
 
-    if (${TARGETNAME}_COPY_BIN) 
-    
-        copy_target(${TARGETNAME} ${CMAKE_SOURCE_DIR}/Bin) 
-
-    endif()
 endmacro()

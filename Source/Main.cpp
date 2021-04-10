@@ -20,8 +20,6 @@
 -------------------------------------------------------------------------------
 */
 #include "Application.h"
-#include "Graphics/skGraphics.h"
-#include "Math/skColor.h"
 #include "Utils/skLogger.h"
 
 int main(int argc, char** argv)

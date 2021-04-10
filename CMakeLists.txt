@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 project(GraphicsTemplate)
 
 # Set the module path to include scripts
-list(APPEND CMAKE_MODULE_PATH  ${GraphicsTemplate_SOURCE_DIR}/CMake)
+list(APPEND CMAKE_MODULE_PATH  ${GraphicsTemplate_SOURCE_DIR}/CMake ${GraphicsTemplate_SOURCE_DIR}/CMake/Modules)
 list(APPEND CMAKE_MODULE_PATH  ${GraphicsTemplate_SOURCE_DIR}/Extern/Data2Array/CMake)
 include(Configure)
 subdirs(CMake)

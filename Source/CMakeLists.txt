@@ -18,7 +18,9 @@
 # 3. This notice may not be removed or altered from any source distribution.
 # ------------------------------------------------------------------------------
 include(Application)
-set(TargetName_RES Resource/AppIcon.rc)
+if(NOT USING_EMSCRIPTEN)
+    set(TargetName_RES Resource/AppIcon.rc)
+endif()
 
 set(GraphicsTemplate_SRC 
     Application.h

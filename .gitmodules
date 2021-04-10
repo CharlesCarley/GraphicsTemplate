@@ -25,3 +25,6 @@
 [submodule "Extern/FreeType"]
 	path = Extern/FreeType
 	url = https://github.com/CharlesCarley/FreeType.git
+[submodule "CMake/Modules"]
+	path = CMake/Modules
+	url = https://github.com/CharlesCarley/CMakeModules.git

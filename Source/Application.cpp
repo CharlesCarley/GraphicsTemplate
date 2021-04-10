@@ -84,6 +84,7 @@ void Application::handle(const skEventType& evt, skWindow* caller)
 
 void Application::redraw()
 {
+    skClearColor1i(0x807080FF);
     skClearContext();
 }
 
@@ -95,14 +96,14 @@ int Application::parseCommandLine(int argc, char** argv)
 
 int Application::run()
 {
-    skWindowManager mgr(WM_CTX_SDL);
-    mgr.addHandler(this);
+    skWindowManager mgr(WM_CTX_SDL, this);
 
-    skWindow* win = mgr.create("GraphicsTemplate", 800, 600, WM_WF_SHOW_CENT_DIA);
+    skWindow* win = mgr.create("GraphicsTemplate", 800, 600, WM_WF_SHOWN);
     skNewContext();
     skProjectContext(SK_STANDARD);
     initialize(win);
-    mgr.broadcastEvent(SK_WIN_SIZE);
+
+    mgr.dispatchInitialEvents();
     mgr.process();
     return 0;
 }
